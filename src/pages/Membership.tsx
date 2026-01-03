@@ -73,7 +73,6 @@ const Membership = () => {
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         setIsSubmitting(true);
 
-        // Create FormData for Formspree
         const formData = new FormData();
         formData.append("nameBn", values.nameBn);
         formData.append("nameEn", values.nameEn);
@@ -92,7 +91,6 @@ const Membership = () => {
         formData.append("socialServiceType", values.socialServiceType.join(", "));
         formData.append("signature", values.signature);
 
-        // Append files from the file input directly
         const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement;
         if (fileInput && fileInput.files && fileInput.files.length > 0) {
             for (let i = 0; i < fileInput.files.length; i++) {
@@ -101,9 +99,8 @@ const Membership = () => {
         }
 
         try {
-            // REPLACE 'PLACEHOLDER_FORM_ID' WITH YOUR ACTUAL FORMSPREE FORM ID
-            // Example: "https://formspree.io/f/xmqwlokn"
-            const response = await fetch("https://formspree.io/fxnjngpnq", {
+            // Changed to the correct URL with '/f/'
+            const response = await fetch("https://formspree.io/f/xnjngpnq", {
                 method: "POST",
                 body: formData,
                 headers: {
@@ -114,7 +111,7 @@ const Membership = () => {
             if (response.ok) {
                 toast.success("আবেদন সফলভাবে জমা দেওয়া হয়েছে! আমরা শীঘ্রই আপনার সাথে যোগাযোগ করব।");
                 form.reset();
-                if (fileInput) fileInput.value = ""; // Reset file input
+                if (fileInput) fileInput.value = "";
             } else {
                 const data = await response.json();
                 if (Object.hasOwn(data, 'errors')) {
@@ -446,7 +443,6 @@ const Membership = () => {
                                         অনুগ্রহ করে আপনার <strong>জাতীয় পরিচয়পত্র / জন্ম নিবন্ধন সনদের ফটোকপি</strong> এবং <strong>পাসপোর্ট সাইজ ছবি</strong> আপলোড করুন। (সর্বোচ্চ ১০ মেগাবাইট)
                                     </p>
                                     <FormControl>
-                                        {/* Standard HTML File Input */}
                                         <input
                                             type="file"
                                             id="attachments"
