@@ -7,6 +7,9 @@ import marufShahriar from "@/assets/committee/maruf-shahriar.jpeg";
 import faisalIqbal from "@/assets/committee/faisal-iqbal.jpg";
 import farhanShahriar from "@/assets/committee/farhan-shahriar.jpeg";
 
+// Blank image placeholder (Solid soft grey)
+const blankImage = "https://dummyimage.com/400x400/e2e8f0/e2e8f0";
+
 export interface CommitteeMember {
   id: string;
   name: string;
@@ -83,49 +86,49 @@ export const advisoryCommittee: CommitteeMember[] = [
     name: "মোসা: রোকসানা বেগম (টুকটুকি)",
     position: "প্রধান উপদেষ্টা",
     period: "ভারপ্রাপ্ত পরিচালক, শরীর চর্চা বিভাগ, রাজশাহী বিশ্ববিদ্যালয়",
-    image: "https://ui-avatars.com/api/?name=রোকসানা+বেগম&background=dc2626&color=fff&size=400&font-size=0.35",
+    image: blankImage,
   },
   {
     id: "advisor-2",
     name: "মোঃ মুঞ্জুর রহমান খান",
     position: "উপদেষ্টা",
     period: "উপ-পরীক্ষা নিয়ন্ত্রক (মাধ্যমিক), মাধ্যমিক ও উচ্চ মাধ্যমিক শিক্ষা বোর্ড রাজশাহী",
-    image: "https://ui-avatars.com/api/?name=মুঞ্জুর+রহমান&background=dc2626&color=fff&size=400&font-size=0.35",
+    image: blankImage,
   },
   {
     id: "advisor-3",
     name: "খাজা তারেক (সিজার)",
     position: "উপদেষ্টা",
     period: "বিশিষ্ট সমাজসেবক ও প্রথম শ্রেণীর ঠিকাদার, পানি উন্নয়ন বোর্ড, সপুরা, রাজশাহী",
-    image: "https://ui-avatars.com/api/?name=খাজা+তারেক&background=dc2626&color=fff&size=400&font-size=0.35",
+    image: blankImage,
   },
   {
     id: "advisor-4",
     name: "মোঃ ইমদাদুল হক",
     position: "উপদেষ্টা",
     period: "রাজশাহী প্রতিনিধি, চ্যানেল এস | সভাপতি, রাজশাহী মডেল প্রেসক্লাব",
-    image: "https://ui-avatars.com/api/?name=ইমদাদুল+হক&background=dc2626&color=fff&size=400&font-size=0.35",
+    image: blankImage,
   },
   {
     id: "advisor-5",
     name: "মো: জাকির হোসেন",
     position: "উপদেষ্টা",
     period: "আইনজীবী, জজ কোর্ট, রাজশাহী",
-    image: "https://ui-avatars.com/api/?name=জাকির+হোসেন&background=dc2626&color=fff&size=400&font-size=0.35",
+    image: blankImage,
   },
   {
     id: "advisor-6",
     name: "মোঃ আশরাফুল ইসলাম",
     position: "উপদেষ্টা",
     period: "ডেন্টিস্ট (বিএসসি ইন ডেন্টাল), ইসলাম ডেন্টাল কেয়ার",
-    image: "https://ui-avatars.com/api/?name=আশরাফুল+ইসলাম&background=dc2626&color=fff&size=400&font-size=0.35",
+    image: blankImage,
   },
   {
     id: "advisor-7",
     name: "শেখ মাহমুদুন্নবী তুষার",
     position: "উপদেষ্টা",
     period: "ক্রীড়াবিদ ও কারাতে কোচ, মাধ্যমিক ও উচ্চ মাধ্যমিক শিক্ষা বোর্ড রাজশাহী",
-    image: "https://ui-avatars.com/api/?name=মাহমুদুন্নবী+তুষার&background=dc2626&color=fff&size=400&font-size=0.35",
+    image: blankImage,
   },
 ];
 
