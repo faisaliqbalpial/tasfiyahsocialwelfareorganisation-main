@@ -41,7 +41,6 @@ const formSchema = z.object({
         message: "ঘোষণাটি গ্রহণ করা আবশ্যক",
     }),
     signature: z.string().min(1, "স্বাক্ষর (নাম) আবশ্যক"),
-    attachments: z.any().optional(),
 });
 
 const Membership = () => {
@@ -91,15 +90,7 @@ const Membership = () => {
         formData.append("socialServiceType", values.socialServiceType.join(", "));
         formData.append("signature", values.signature);
 
-        const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement;
-        if (fileInput && fileInput.files && fileInput.files.length > 0) {
-            for (let i = 0; i < fileInput.files.length; i++) {
-                formData.append("attachment", fileInput.files[i]);
-            }
-        }
-
         try {
-            // Changed to the correct URL with '/f/'
             const response = await fetch("https://formspree.io/f/xnjngpnq", {
                 method: "POST",
                 body: formData,
@@ -111,11 +102,11 @@ const Membership = () => {
             if (response.ok) {
                 toast.success("আবেদন সফলভাবে জমা দেওয়া হয়েছে! আমরা শীঘ্রই আপনার সাথে যোগাযোগ করব।");
                 form.reset();
-                if (fileInput) fileInput.value = "";
             } else {
                 const data = await response.json();
                 if (Object.hasOwn(data, 'errors')) {
-                    toast.error(data["errors"].map((error: any) => error["message"]).join(", "));
+                    const errorMessages = data["errors"].map((error: any) => error["message"]).join(", ");
+                    toast.error(errorMessages);
                 } else {
                     toast.error("দুঃখিত, আবেদন জমা দিতে সমস্যা হয়েছে। আবার চেষ্টা করুন।");
                 }
@@ -434,26 +425,18 @@ const Membership = () => {
                                     />
                                 </div>
 
-                                {/* Attachments */}
+                                {/* Attachments Instruction - Changed from Upload to Instruction */}
                                 <div className="bg-amber-50 border border-amber-200 p-4 rounded-lg space-y-3">
                                     <h4 className="font-semibold text-amber-800 flex items-center gap-2">
-                                        📎 সংযুক্তি
+                                        📎 প্রয়োজনীয় কাগজপত্র
                                     </h4>
-                                    <p className="text-sm text-muted-foreground">
-                                        অনুগ্রহ করে আপনার <strong>জাতীয় পরিচয়পত্র / জন্ম নিবন্ধন সনদের ফটোকপি</strong> এবং <strong>পাসপোর্ট সাইজ ছবি</strong> আপলোড করুন। (সর্বোচ্চ ১০ মেগাবাইট)
+                                    <p className="text-sm text-amber-900 leading-relaxed">
+                                        অনলাইনে আবেদন জমা দেওয়ার পর, সদস্যপদ চূড়ান্তকরণের জন্য অনুগ্রহ করে নিচের কাগজপত্রগুলো <strong>অফিসে</strong> সরাসরি জমা দিন:
                                     </p>
-                                    <FormControl>
-                                        <input
-                                            type="file"
-                                            id="attachments"
-                                            multiple
-                                            accept="image/*,.pdf"
-                                            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer pt-1.5"
-                                        />
-                                    </FormControl>
-                                    <p className="text-xs text-muted-foreground">
-                                        * একাধিক ফাইল নির্বাচন করতে পারেন
-                                    </p>
+                                    <ul className="list-disc list-inside text-sm text-amber-900 ml-2 space-y-1">
+                                        <li>জাতীয় পরিচয়পত্র অথবা জন্ম নিবন্ধন সনদের ফটোকপি</li>
+                                        <li>পাসপোর্ট সাইজ ছবি</li>
+                                    </ul>
                                 </div>
 
                                 {/* Declaration */}
