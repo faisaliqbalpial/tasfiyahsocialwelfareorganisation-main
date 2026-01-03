@@ -146,8 +146,8 @@ const Header = () => {
 
           {/* CTA Button */}
           <div className="hidden md:flex items-center gap-3">
-            <Button variant="hero" size="default">
-              সদস্য হন
+            <Button variant="hero" size="default" asChild>
+              <Link to="/join">সদস্য হন</Link>
             </Button>
           </div>
 
@@ -233,8 +233,8 @@ const Header = () => {
               </Accordion>
 
               <div className="px-6 mt-4 pb-4">
-                <Button variant="hero" size="lg" className="w-full justify-center">
-                  সদস্য হন
+                <Button variant="hero" size="lg" className="w-full justify-center" asChild>
+                  <Link to="/join" onClick={() => setIsMenuOpen(false)}>সদস্য হন</Link>
                 </Button>
               </div>
             </div>
