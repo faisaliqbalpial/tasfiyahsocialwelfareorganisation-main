@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -10,7 +10,6 @@ import {
     FormItem,
     FormLabel,
     FormMessage,
-    FormDescription,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -42,6 +41,7 @@ const formSchema = z.object({
         message: "ঘোষণাটি গ্রহণ করা আবশ্যক",
     }),
     signature: z.string().min(1, "স্বাক্ষর (নাম) আবশ্যক"),
+    attachments: z.any().optional(),
 });
 
 const Membership = () => {
@@ -73,52 +73,61 @@ const Membership = () => {
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         setIsSubmitting(true);
 
-        // Construct email body
-        const subject = "নতুন সদস্য আবেদন - তাসফিয়াহ সমাজকল্যাণ সংস্থা";
-        const body = `
-তাসফিয়াহ সমাজকল্যাণ সংস্থা - সদস্য আবেদন ফর্ম
+        // Create FormData for Formspree
+        const formData = new FormData();
+        formData.append("nameBn", values.nameBn);
+        formData.append("nameEn", values.nameEn);
+        formData.append("fatherName", values.fatherName);
+        formData.append("motherName", values.motherName);
+        formData.append("dob", values.dob);
+        formData.append("maritalStatus", values.maritalStatus);
+        formData.append("presentAddress", values.presentAddress);
+        formData.append("permanentAddress", values.permanentAddress);
+        formData.append("mobile", values.mobileWrapper);
+        formData.append("email", values.email || "N/A");
+        formData.append("education", values.education);
+        formData.append("institution", values.institution || "N/A");
+        formData.append("department", values.department || "N/A");
+        formData.append("skills", values.skills || "N/A");
+        formData.append("socialServiceType", values.socialServiceType.join(", "));
+        formData.append("signature", values.signature);
 
-ক্রমিক নং: (অফিস কর্তৃক পূরণীয়)
-তারিখ: ${new Date().toLocaleDateString()}
+        // Append files from the file input directly
+        const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement;
+        if (fileInput && fileInput.files && fileInput.files.length > 0) {
+            for (let i = 0; i < fileInput.files.length; i++) {
+                formData.append("attachment", fileInput.files[i]);
+            }
+        }
 
-ব্যক্তিগত তথ্য:
-নাম (বাংলা): ${values.nameBn}
-নাম (ইংরেজি): ${values.nameEn}
-পিতার নাম: ${values.fatherName}
-মাতার নাম: ${values.motherName}
-জন্ম তারিখ: ${values.dob}
-বৈবাহিক অবস্থা: ${values.maritalStatus}
+        try {
+            // REPLACE 'PLACEHOLDER_FORM_ID' WITH YOUR ACTUAL FORMSPREE FORM ID
+            // Example: "https://formspree.io/f/xmqwlokn"
+            const response = await fetch("https://formspree.io/fxnjngpnq", {
+                method: "POST",
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
 
-ঠিকানা:
-বর্তমান ঠিকানা: ${values.presentAddress}
-স্থায়ী ঠিকানা: ${values.permanentAddress}
-
-যোগাযোগ:
-মোবাইল: ${values.mobileWrapper}
-ই-মেইল: ${values.email}
-
-শিক্ষা ও দক্ষতা:
-শিক্ষাগত যোগ্যতা: ${values.education}
-প্রতিষ্ঠান: ${values.institution}
-বিষয় / বিভাগ: ${values.department}
-দক্ষতা: ${values.skills}
-
-সমাজসেবার ধরন: ${values.socialServiceType.join(", ")}
-
-ঘোষণা:
-আমি অঙ্গীকার করছি যে, তাসফিয়াহ সমাজকল্যাণ সংস্থা-এর গঠনতন্ত্র, নীতিমালা ও সকল নিয়ম-কানুন সম্পূর্ণরূপে মেনে চলবো।
-
-আবেদনকারীর স্বাক্ষর: ${values.signature}
-    `;
-
-        // Create mailto link
-        const mailtoLink = `mailto:mdsaadrafsan@gmail.com,subessarbis@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
-        // Open mail client
-        window.location.href = mailtoLink;
-
-        toast.success("আপনার ডিফল্ট ইমেইল অ্যাপ খোলা হচ্ছে। অনুগ্রহ করে সেন্ড বাটনে ক্লিক করুন এবং ছবি সংযুক্ত করতে ভুলবেন না।");
-        setIsSubmitting(false);
+            if (response.ok) {
+                toast.success("আবেদন সফলভাবে জমা দেওয়া হয়েছে! আমরা শীঘ্রই আপনার সাথে যোগাযোগ করব।");
+                form.reset();
+                if (fileInput) fileInput.value = ""; // Reset file input
+            } else {
+                const data = await response.json();
+                if (Object.hasOwn(data, 'errors')) {
+                    toast.error(data["errors"].map((error: any) => error["message"]).join(", "));
+                } else {
+                    toast.error("দুঃখিত, আবেদন জমা দিতে সমস্যা হয়েছে। আবার চেষ্টা করুন।");
+                }
+            }
+        } catch (error) {
+            toast.error("নেটওয়ার্ক ত্রুটি। অনুগ্রহ করে আপনার ইন্টারনেট সংযোগ পরীক্ষা করুন।");
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     return (
@@ -428,13 +437,26 @@ const Membership = () => {
                                     />
                                 </div>
 
-                                {/* Attachments Notice */}
-                                <div className="bg-amber-50 border border-amber-200 p-4 rounded-lg">
-                                    <h4 className="font-semibold text-amber-800 mb-2 flex items-center gap-2">
-                                        📎 সংযুক্তি (ইমেইল পাঠানোর সময় সংযুক্ত করুন)
+                                {/* Attachments */}
+                                <div className="bg-amber-50 border border-amber-200 p-4 rounded-lg space-y-3">
+                                    <h4 className="font-semibold text-amber-800 flex items-center gap-2">
+                                        📎 সংযুক্তি
                                     </h4>
-                                    <p className="text-sm text-amber-700">
-                                        জাতীয় পরিচয়পত্র / জন্ম নিবন্ধন সনদের ফটোকপি এবং পাসপোর্ট সাইজ ছবি।
+                                    <p className="text-sm text-muted-foreground">
+                                        অনুগ্রহ করে আপনার <strong>জাতীয় পরিচয়পত্র / জন্ম নিবন্ধন সনদের ফটোকপি</strong> এবং <strong>পাসপোর্ট সাইজ ছবি</strong> আপলোড করুন। (সর্বোচ্চ ১০ মেগাবাইট)
+                                    </p>
+                                    <FormControl>
+                                        {/* Standard HTML File Input */}
+                                        <input
+                                            type="file"
+                                            id="attachments"
+                                            multiple
+                                            accept="image/*,.pdf"
+                                            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer pt-1.5"
+                                        />
+                                    </FormControl>
+                                    <p className="text-xs text-muted-foreground">
+                                        * একাধিক ফাইল নির্বাচন করতে পারেন
                                     </p>
                                 </div>
 
