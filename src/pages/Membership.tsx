@@ -143,7 +143,7 @@ const Membership = () => {
                         <h2 className="text-xl font-bold text-foreground mb-2">Tasfiyah Social Welfare Organization</h2>
                         <p className="text-muted-foreground italic mb-4">মানবতার সেবা, একটি উত্তম ধর্মীয় নির্দেশ</p>
                         <div className="text-sm text-muted-foreground space-y-1">
-                            <p>প্রধান কার্যালয়: বাড়ি নং–৪৫ (হোসেন আলী), জিমিডাঙ্গা, ৬০০০, রাজশাহী</p>
+                            <p>প্রধান কার্যালয়: বাড়ি নং–৪৫ হেতেমখা, ৬০০০,রাজশাহী</p>
                             <p>যোগাযোগ: ০১৯০৮-২৯৫৭৯৪, ০১৭২২-৩৫৭৫০০</p>
                         </div>
                         <div className="mt-6 inline-block border-b-2 border-primary pb-1">
