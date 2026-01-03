@@ -8,6 +8,7 @@ import Founder from "./pages/Founder";
 import Committee from "./pages/Committee";
 import Membership from "./pages/Membership";
 import NotFound from "./pages/NotFound";
+import FloatingWhatsApp from "./components/FloatingWhatsApp";
 
 const queryClient = new QueryClient();
 
@@ -17,6 +18,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <FloatingWhatsApp />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/founder" element={<Founder />} />

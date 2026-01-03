@@ -179,54 +179,51 @@ const Header = () => {
                 </a>
               ))}
 
+              {/* Founder - Direct Link */}
+              <Link
+                to="/founder"
+                className="block px-4 py-3 text-base font-medium text-muted-foreground hover:text-primary hover:bg-muted rounded-lg transition-colors mx-2"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <div className="flex items-center gap-2">
+                  <User className="w-4 h-4" />
+                  প্রতিষ্ঠাতা
+                </div>
+              </Link>
+
+              {/* Committee - Accordion */}
               <Accordion type="single" collapsible className="w-full px-2">
-                <AccordionItem value="more" className="border-none">
+                <AccordionItem value="committee" className="border-none">
                   <AccordionTrigger className="px-4 py-3 text-base font-medium text-muted-foreground hover:text-primary hover:no-underline hover:bg-muted rounded-lg">
-                    আরও
+                    <span className="flex items-center gap-2">
+                      <Users className="w-4 h-4" />
+                      কমিটি
+                    </span>
                   </AccordionTrigger>
                   <AccordionContent className="pb-0 pt-1">
-                    <div className="flex flex-col gap-1 pl-4">
+                    <div className="flex flex-col gap-1 pl-4 border-l ml-6 my-1">
                       <Link
-                        to="/founder"
-                        className="flex items-center gap-2 py-3 px-4 text-sm font-medium text-muted-foreground hover:text-primary hover:bg-muted rounded-lg"
+                        to="/committee?type=executive"
+                        className="flex items-center gap-2 py-3 px-2 text-sm font-medium text-muted-foreground hover:text-primary rounded-md hover:bg-muted/50"
                         onClick={() => setIsMenuOpen(false)}
                       >
-                        <User className="w-4 h-4" />
-                        প্রতিষ্ঠাতা
+                        কার্যনির্বাহী কমিটি
                       </Link>
-
-                      <Accordion type="single" collapsible className="w-full border-none">
-                        <AccordionItem value="committee" className="border-none">
-                          <AccordionTrigger className="py-3 px-4 text-sm font-medium text-muted-foreground hover:text-primary hover:no-underline hover:bg-muted rounded-lg justify-start gap-2">
-                            <span className="flex items-center gap-2"> <Users className="w-4 h-4" /> কমিটি</span>
-                          </AccordionTrigger>
-                          <AccordionContent className="pb-0">
-                            <div className="flex flex-col gap-1 pl-4 border-l ml-6 my-1">
-                              <Link
-                                to="/committee?type=executive"
-                                className="flex items-center gap-2 py-2 px-2 text-sm font-medium text-muted-foreground hover:text-primary rounded-md hover:bg-muted/50"
-                                onClick={() => setIsMenuOpen(false)}
-                              >
-                                কার্যনির্বাহী কমিটি
-                              </Link>
-                              <Link
-                                to="/committee?type=advisory"
-                                className="flex items-center gap-2 py-2 px-2 text-sm font-medium text-muted-foreground hover:text-primary rounded-md hover:bg-muted/50"
-                                onClick={() => setIsMenuOpen(false)}
-                              >
-                                উপদেষ্টা কমিটি
-                              </Link>
-                              <Link
-                                to="/committee?type=volunteers"
-                                className="flex items-center gap-2 py-2 px-2 text-sm font-medium text-muted-foreground hover:text-primary rounded-md hover:bg-muted/50"
-                                onClick={() => setIsMenuOpen(false)}
-                              >
-                                স্বেচ্ছাসেবক
-                              </Link>
-                            </div>
-                          </AccordionContent>
-                        </AccordionItem>
-                      </Accordion>
+                      <Link
+                        to="/committee?type=advisory"
+                        className="flex items-center gap-2 py-3 px-2 text-sm font-medium text-muted-foreground hover:text-primary rounded-md hover:bg-muted/50"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        উপদেষ্টা কমিটি
+                      </Link>
+                      <Link
+                        to="/committee?type=volunteers"
+                        className="flex items-center gap-2 py-3 px-2 text-sm font-medium text-muted-foreground hover:text-primary rounded-md hover:bg-muted/50"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        <Heart className="w-4 h-4" />
+                        স্বেচ্ছাসেবক
+                      </Link>
                     </div>
                   </AccordionContent>
                 </AccordionItem>
