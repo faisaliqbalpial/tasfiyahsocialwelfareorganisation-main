@@ -50,7 +50,7 @@ const Hero = () => {
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16 opacity-0 animate-fade-up delay-400">
             <Button variant="hero" size="xl" className="group" asChild>
-              <Link to="/join">
+              <Link to="/membership">
                 আমাদের সাথে যোগ দিন
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
