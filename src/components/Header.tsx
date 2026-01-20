@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Menu, X, User, Users, UserCheck, Heart, FileText } from "lucide-react";
+import { Menu, X, User, UserCheck, Heart, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "@/assets/logo.jpg";
@@ -112,15 +112,6 @@ const Header = () => {
                       </li>
                       <li>
                         <Link
-                          to="/committee?type=executive"
-                          className="flex items-center gap-2 p-2 rounded-md hover:bg-muted select-none leading-none no-underline outline-none transition-colors text-popover-foreground"
-                        >
-                          <Users className="w-4 h-4" />
-                          <span className="text-sm font-medium">কার্যনির্বাহী কমিটি</span>
-                        </Link>
-                      </li>
-                      <li>
-                        <Link
                           to="/committee?type=advisory"
                           className="flex items-center gap-2 p-2 rounded-md hover:bg-muted select-none leading-none no-underline outline-none transition-colors text-popover-foreground"
                         >
@@ -205,19 +196,12 @@ const Header = () => {
                 <AccordionItem value="committee" className="border-none">
                   <AccordionTrigger className="px-4 py-3 text-base font-medium text-muted-foreground hover:text-primary hover:no-underline hover:bg-muted rounded-lg">
                     <span className="flex items-center gap-2">
-                      <Users className="w-4 h-4" />
+                      <UserCheck className="w-4 h-4" />
                       কমিটি
                     </span>
                   </AccordionTrigger>
                   <AccordionContent className="pb-0 pt-1">
                     <div className="flex flex-col gap-1 pl-4 border-l ml-6 my-1">
-                      <Link
-                        to="/committee?type=executive"
-                        className="flex items-center gap-2 py-3 px-2 text-sm font-medium text-muted-foreground hover:text-primary rounded-md hover:bg-muted/50"
-                        onClick={() => setIsMenuOpen(false)}
-                      >
-                        কার্যনির্বাহী কমিটি
-                      </Link>
                       <Link
                         to="/committee?type=advisory"
                         className="flex items-center gap-2 py-3 px-2 text-sm font-medium text-muted-foreground hover:text-primary rounded-md hover:bg-muted/50"

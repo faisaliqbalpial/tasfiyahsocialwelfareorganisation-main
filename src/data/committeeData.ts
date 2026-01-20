@@ -1,11 +1,5 @@
-// Committee Member Images
-import astakAhadKhan from "@/assets/committee/astak-ahad-khan.jpeg";
 import zinnatRayhanShishir from "@/assets/committee/zinnat-rayhan-shishir.jpeg";
 import nurMohammadSad from "@/assets/committee/nur-mohammad-sad.jpeg";
-import ratulIslam from "@/assets/committee/ratul-islam.jpeg";
-import marufShahriar from "@/assets/committee/maruf-shahriar.jpeg";
-import faisalIqbal from "@/assets/committee/faisal-iqbal.jpg";
-import farhanShahriar from "@/assets/committee/farhan-shahriar.jpeg";
 
 // Blank image placeholder (Solid soft grey)
 const blankImage = "https://dummyimage.com/400x400/e2e8f0/e2e8f0";
@@ -20,65 +14,6 @@ export interface CommitteeMember {
   email?: string;
   period: string;
 }
-
-export const executiveCommittee: CommitteeMember[] = [
-  {
-    id: "astak-ahad-khan",
-    name: "আস্তাক আহাদ খান",
-    position: "সভাপতি",
-    image: astakAhadKhan,
-    period: "কার্যনির্বাহী কমিটি ২০২৫-২৬",
-    message: "সমাজের সেবায় নিজেকে উৎসর্গ করা আমাদের সংগঠনের মূল লক্ষ্য। মানবতার সেবায় আমরা সর্বদা প্রতিশ্রুতিবদ্ধ।"
-  },
-  {
-    id: "zinnat-rayhan-shishir",
-    name: "মো: জিন্নাত রায়হান শিশির",
-    position: "সহ-সভাপতি",
-    image: zinnatRayhanShishir,
-    period: "কার্যনির্বাহী কমিটি ২০২৫-২৬",
-    message: "একতাবদ্ধ হয়ে কাজ করলে যেকোনো লক্ষ্য অর্জন সম্ভব।"
-  },
-  {
-    id: "nur-mohammad-sad",
-    name: "নূর মোহাম্মদ সাদ",
-    position: "সাধারণ সম্পাদক",
-    image: nurMohammadSad,
-    period: "কার্যনির্বাহী কমিটি ২০২৫-২৬",
-    message: "রক্তদান শুধু একটি মানবিক কাজ নয়, এটি একটি জীবন দান। তরুণ সমাজকে উদ্বুদ্ধ করতে চাই।"
-  },
-  {
-    id: "ratul-islam",
-    name: "মোঃ রাতুল ইসলাম",
-    position: "যুগ্ম সাধারণ সম্পাদক",
-    image: ratulIslam,
-    period: "কার্যনির্বাহী কমিটি ২০২৫-২৬",
-    message: "সামাজিক দায়বদ্ধতা থেকে কাজ করাই আমাদের অঙ্গীকার।"
-  },
-  {
-    id: "maruf-shahriar",
-    name: "মারুফ শাহরিয়ার",
-    position: "কোষাধ্যক্ষ",
-    image: marufShahriar,
-    period: "কার্যনির্বাহী কমিটি ২০২৫-২৬",
-    message: "সততা ও স্বচ্ছতার সাথে সংগঠনের আর্থিক ব্যবস্থাপনায় প্রতিশ্রুতিবদ্ধ।"
-  },
-  {
-    id: "faisal-iqbal",
-    name: "মো: ফয়সাল ইকবাল",
-    position: "সাংগঠনিক সম্পাদক",
-    image: faisalIqbal,
-    period: "কার্যনির্বাহী কমিটি ২০২৫-২৬",
-    message: "সংগঠনের শক্তি হলো এর সদস্যরা। সবাইকে নিয়ে এগিয়ে যাওয়াই আমার লক্ষ্য।"
-  },
-  {
-    id: "farhan-shahriar",
-    name: "ফারহান শাহরিয়ার",
-    position: "নির্বাহী সদস্য",
-    image: farhanShahriar,
-    period: "কার্যনির্বাহী কমিটি ২০২৫-২৬",
-    message: "সেবার মাধ্যমে সমাজে ইতিবাচক পরিবর্তন আনতে চাই।"
-  }
-];
 
 export const advisoryCommittee: CommitteeMember[] = [
   {
