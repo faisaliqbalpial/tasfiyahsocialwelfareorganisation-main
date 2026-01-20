@@ -3,8 +3,8 @@ import { useSearchParams } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MemberProfileModal from "@/components/MemberProfileModal";
-import { executiveCommittee, advisoryCommittee, volunteers, CommitteeMember } from "@/data/committeeData";
-import { Users, UserCheck, Heart } from "lucide-react";
+import { executiveCommittee, advisoryCommittee, adhocCommittee, volunteers, CommitteeMember } from "@/data/committeeData";
+import { Users, UserCheck, Heart, FileText } from "lucide-react";
 
 const Committee = () => {
   const [searchParams] = useSearchParams();
@@ -14,6 +14,7 @@ const Committee = () => {
   const tabs = [
     { id: "executive", name: "কার্যনির্বাহী কমিটি", icon: Users, data: executiveCommittee },
     { id: "advisory", name: "উপদেষ্টা কমিটি", icon: UserCheck, data: advisoryCommittee },
+    { id: "adhoc", name: "অ্যাডহক কমিটি", icon: FileText, data: adhocCommittee },
     { id: "volunteers", name: "স্বেচ্ছাসেবক", icon: Heart, data: volunteers },
   ];
 
@@ -44,11 +45,10 @@ const Committee = () => {
                 <a
                   key={tab.id}
                   href={`/committee?type=${tab.id}`}
-                  className={`flex items-center gap-2 px-6 py-3 rounded-full font-medium transition-all ${
-                    activeTab.id === tab.id
+                  className={`flex items-center gap-2 px-6 py-3 rounded-full font-medium transition-all ${activeTab.id === tab.id
                       ? "bg-primary text-primary-foreground shadow-lg"
                       : "bg-muted text-muted-foreground hover:bg-muted/80"
-                  }`}
+                    }`}
                 >
                   <tab.icon className="w-5 h-5" />
                   {tab.name}

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Menu, X, User, Users, UserCheck, Heart } from "lucide-react";
+import { Menu, X, User, Users, UserCheck, Heart, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "@/assets/logo.jpg";
@@ -130,6 +130,15 @@ const Header = () => {
                       </li>
                       <li>
                         <Link
+                          to="/committee?type=adhoc"
+                          className="flex items-center gap-2 p-2 rounded-md hover:bg-muted select-none leading-none no-underline outline-none transition-colors text-popover-foreground"
+                        >
+                          <FileText className="w-4 h-4" />
+                          <span className="text-sm font-medium">অ্যাডহক কমিটি</span>
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
                           to="/committee?type=volunteers"
                           className="flex items-center gap-2 p-2 rounded-md hover:bg-muted select-none leading-none no-underline outline-none transition-colors text-popover-foreground"
                         >
@@ -215,6 +224,14 @@ const Header = () => {
                         onClick={() => setIsMenuOpen(false)}
                       >
                         উপদেষ্টা কমিটি
+                      </Link>
+                      <Link
+                        to="/committee?type=adhoc"
+                        className="flex items-center gap-2 py-3 px-2 text-sm font-medium text-muted-foreground hover:text-primary rounded-md hover:bg-muted/50"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        <FileText className="w-4 h-4" />
+                        অ্যাডহক কমিটি
                       </Link>
                       <Link
                         to="/committee?type=volunteers"
